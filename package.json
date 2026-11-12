@@ -1,0 +1,18 @@
+{
+  "name": "games-royale-server",
+  "version": "1.2.0",
+  "description": "Servidor online do Games Royale: contas, amigos, grupos, matchmaking híbrido e relay da partida.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "migrate": "node migrate.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pg": "^8.13.0",
+    "ws": "^8.18.0"
+  },
+  "license": "MIT"
+}
