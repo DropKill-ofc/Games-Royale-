@@ -1,0 +1,26 @@
+# Blueprint do Render: Games Royale + banco PostgreSQL persistente.
+# Os nomes internos antigos do serviço/banco são mantidos como IDs de implantação, para preservar URLs e dados existentes.
+# Ajuste "plan" conforme sua conta (o PostgreSQL gratuito do Render expira; para dados permanentes use um plano pago).
+services:
+  - type: web
+    name: dropkill
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    numInstances: 1            # o jogo mantem as partidas em memoria: uma unica instancia
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dropkill-db
+          property: connectionString
+      - key: OWNER_KEY          # chave para criar a conta GamesRoyale (veja no painel do Render)
+        generateValue: true
+      - key: MM_WAIT
+        value: "10"
+
+databases:
+  - name: dropkill-db
+    plan: basic-256mb
+    databaseName: dropkill
