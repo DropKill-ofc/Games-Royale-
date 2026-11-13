@@ -1,0 +1,22 @@
+# Games Royale + Supabase PostgreSQL.
+# No Render database is created: add DATABASE_URL in the Render Dashboard.
+services:
+  - type: web
+    name: games-royale
+    runtime: node
+    plan: starter
+    region: ohio
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    numInstances: 1
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: OWNER_KEY
+        generateValue: true
+      - key: MM_WAIT
+        value: "10"
